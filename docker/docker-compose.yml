@@ -35,3 +35,8 @@ services:
       - MAP=$MAP
       - EXTRA_STARTUP_ARGS=$EXTRA_STARTUP_ARGS
       - GMOD_BRANCH=$GMOD_BRANCH
+      - DB_HOST=${DB_HOST:-127.0.0.1}
+      - DB_USER=${DB_USER:-gluatest}
+      - DB_PASSWORD=${DB_PASSWORD:-gluatest}
+      - DB_NAME=${DB_NAME:-gluatest}
+      - DB_SCHEMA_FILE=${DB_SCHEMA_FILE}

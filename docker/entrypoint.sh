@@ -7,6 +7,41 @@ pat=$GITHUB_TOKEN@
 timeout="${TIMEOUT:-2}"m
 gmodbranch="${GMOD_BRANCH}"
 
+# Start MariaDB
+echo "Starting MariaDB..."
+service mariadb start
+
+# Wait for MariaDB to be ready
+echo "Waiting for MariaDB to start..."
+while ! mysqladmin ping -h"localhost" --silent; do
+    sleep 1
+done
+
+# Initialize DB
+if [[ ! -z "$DB_NAME" ]]; then
+    echo "Creating database $DB_NAME..."
+    mysql -e "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;"
+
+    if [[ ! -z "$DB_USER" && ! -z "$DB_PASSWORD" ]]; then
+        echo "Creating user $DB_USER..."
+        mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASSWORD';"
+        mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';"
+        mysql -e "GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO '$DB_USER'@'localhost';"
+        mysql -e "GRANT ALL PRIVILEGES ON \`$DB_NAME\`.* TO '$DB_USER'@'%';"
+        mysql -e "FLUSH PRIVILEGES;"
+    fi
+fi
+
+# Load schema if specified
+if [[ ! -z "$DB_SCHEMA_FILE" ]]; then
+    if [[ -f "$DB_SCHEMA_FILE" ]]; then
+        echo "Loading schema from $DB_SCHEMA_FILE..."
+        mysql "$DB_NAME" < "$DB_SCHEMA_FILE"
+    else
+        echo "::warning:: Schema file $DB_SCHEMA_FILE not found!"
+    fi
+fi
+
 # Make sure docker-slim doesn't remove bins we'll eventually need
 echo $(date)
 python3 -c "print()" &> /dev/null
