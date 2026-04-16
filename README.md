@@ -115,7 +115,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
 ```
 
 And that's it! The next time you make a PR, it'll spin up a new test server, run your project's test, and report any failures in your PR.
@@ -158,7 +158,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       requirements: lua/tests/my_project/requirements.txt
 ```
@@ -197,7 +197,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       server-cfg: lua/tests/my_project/server.cfg
 ```
@@ -224,7 +224,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       gamemode: darkrp
       map: rp_downtown_tits_v2
@@ -251,7 +251,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       collection: 1629732176
 ```
@@ -277,7 +277,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       branch: x86-64
 ```
@@ -307,7 +307,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
     with:
       extra-startup-args: "-tickrate 16 -usegh"
 ```

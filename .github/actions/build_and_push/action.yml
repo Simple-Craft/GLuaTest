@@ -49,7 +49,7 @@ runs:
       run: |
         cd ${{ inputs.path }}/docker
 
-        BASE=ghcr.io/cfc-servers/gluatest/${{ inputs.gmod_branch }}
+        BASE=ghcr.io/simple-craft/gluatest/${{ inputs.gmod_branch }}
 
         rawVersionTag=${{ inputs.tag_name }}
         id=${{ inputs.game_version }}
@@ -94,6 +94,6 @@ runs:
     - name: Tag and push slim image
       shell: bash
       run: |
-        BASE=ghcr.io/cfc-servers/gluatest/${{ inputs.gmod_branch }}
+        BASE=ghcr.io/simple-craft/gluatest/${{ inputs.gmod_branch }}
 
         docker push "$BASE" --all-tags
