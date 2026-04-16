@@ -6,7 +6,7 @@ ARG GLUATEST_REPO=https://github.com/CFC-Servers/GLuaTest.git
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt install -y --no-install-recommends --no-install-suggests git python3-minimal expect rsync openssh-client gdb && apt autoremove
+RUN apt update && apt install -y --no-install-recommends --no-install-suggests git python3-minimal expect rsync openssh-client gdb mariadb-server curl jq ca-certificates && apt autoremove
 
 ARG home=/home/steam
 ARG gmodroot=$home/gmodserver
@@ -43,6 +43,11 @@ RUN ssh-keyscan github.com >> $home/github_known_hosts
 
 # Enable core dumps
 RUN ulimit -c unlimited
+
+# MySQLOO
+RUN mkdir -p $server/lua/bin && \
+    curl -s https://api.github.com/repos/FredyH/MySQLOO/releases/latest | jq -r '.assets[] | select(.name | startswith("gmsv_mysqloo_linux")) | .browser_download_url' | xargs -n 1 curl -OJL -k && \
+    mv gmsv_mysqloo_linux* $server/lua/bin/
 
 # Entrypoint
 COPY entrypoint.sh $gmodroot/entrypoint.sh
