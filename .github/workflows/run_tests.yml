@@ -66,7 +66,7 @@ on:
         type: string
         required: false
         description: "The GLuaTest repository to use. This is usually the same as the one this action is in"
-        default: "https://github.com/CFC-Servers/GLuaTest"
+        default: "https://github.com/simple-craft/GLuaTest"
 
       gluatest-ref:
         type: string
@@ -236,7 +236,7 @@ jobs:
             --build-arg="GMOD_BRANCH=${{ inputs.branch }}" \
             --build-arg="GLUATEST_REPO=${{ inputs.gluatest-repo }}.git" \
             --build-arg="GLUATEST_REF=${{ inputs.gluatest-ref }}" \
-            --tag ghcr.io/cfc-servers/gluatest/${{ inputs.branch }}:latest .
+            --tag ghcr.io/simple-craft/gluatest/${{ inputs.branch }}:latest .
 
       - name: Run GLuaTest
         env:

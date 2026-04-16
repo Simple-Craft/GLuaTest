@@ -2,7 +2,7 @@ FROM ghcr.io/cfc-servers/steamcmd:latest
 
 ARG GMOD_BRANCH=public
 ARG GLUATEST_REF=main
-ARG GLUATEST_REPO=https://github.com/CFC-Servers/GLuaTest.git
+ARG GLUATEST_REPO=https://github.com/simple-craft/GLuaTest.git
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive

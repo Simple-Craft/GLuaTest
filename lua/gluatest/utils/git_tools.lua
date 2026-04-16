@@ -55,17 +55,17 @@ function GitTools.getClonedInfo()
     for i = 1, #fetchLines do
         local line = fetchLines[i]
         if string.find( line, currentBranch, 1, true ) then
-            -- 808ff35547ca8fd7efe50ef9a214fbd32b4dbefc        not-for-merge   branch 'feature/runner-improvement' of github.com:CFC-Servers/GLuaTest
+            -- 808ff35547ca8fd7efe50ef9a214fbd32b4dbefc        not-for-merge   branch 'feature/runner-improvement' of github.com:simple-craft/GLuaTest
             branchLine = line
             break
         end
     end
     if not branchLine then return nil end
 
-    -- 808ff35547ca8fd7efe50ef9a214fbd32b4dbefc not-for-merge branch 'feature/runner-improvement' of github.com:CFC-Servers/GLuaTest
+    -- 808ff35547ca8fd7efe50ef9a214fbd32b4dbefc not-for-merge branch 'feature/runner-improvement' of github.com:simple-craft/GLuaTest
     branchLine = string.gsub( branchLine, "%s+", " " )
 
-    -- "feature/runner-improvement", "github.com:CFC-Servers/GLuaTest"
+    -- "feature/runner-improvement", "github.com:simple-craft/GLuaTest"
     local _, _, branch, repo = string.find( branchLine, "branch '(.+)' of (.+)$" )
     if not branch or not repo then return end
 
@@ -77,13 +77,13 @@ function GitTools.getClonedInfo()
         commit = "<unknown commit>"
     end
 
-    -- "github.com/CFC-Servers/GLuaTest"
+    -- "github.com/simple-craft/GLuaTest"
     repo = string.gsub( repo, "https://", "" )
     repo = string.gsub( repo, "http://", "" )
     repo = string.gsub( repo, ":", "/" )
     repo = string.gsub( repo, ".git", "" )
 
-    -- "github.com/CFC-Servers/GLuaTest@main#(6679969)"
+    -- "github.com/simple-craft/GLuaTest@main#(6679969)"
     return string.format( "%s@%s#%s", repo, branch, commit )
 end
 

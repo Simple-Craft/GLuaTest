@@ -48,7 +48,7 @@ on:
 
 jobs:
   run-tests:
-    uses: CFC-Servers/GLuaTest/.github/workflows/run_tests.yml@main
+    uses: simple-craft/GLuaTest/.github/workflows/run_tests.yml@main
 
     # The entire 'with' block and every item in it are optional
     with:
